@@ -1,9 +1,18 @@
+<!-- this file is for the index page of the polls app, which lists the latest questions added by the user. -->
+<!-- The file uses Django's template language to dynamically generate the HTML content. -->
+
+<!-- question.question.text is used to display the uestion text -->
 <h1>{{ question.question.text }}</h1>
 
 <ul>
+<!-- this for loop will iterate through the question.choice_set.all and display each choice -->
 {% for choice in question.choice_set.all %}
+    <!-- choice.choice_text is used to display the choice text -->
+     <!-- choice.votes is used to display the number of votes for each choice -->
+    <!-- pluralize is used to add an 's' to the word vote if there are more than one vote -->
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+<!-- endfor is used to end the for loop --> 
 {% endfor %}    
 </ul>
-
+<!-- this line is used to display the number of votes for each choice -->
 <a href="{% url 'polls:detail' quesiton.id %}">Vote again?</a>

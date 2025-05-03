@@ -1,20 +1,34 @@
+<!-- this file is for the index page of the polls app, which lists the latest questions added by the user. -->
 <h1>{{ question.question_text }}</h1>
 <ul>
+  <!--  this for loop will iterate through the question.choice_set.all and display each choice -->
+  <!-- choice.choice_text is used to display the choice text -->
   {% for choice in question.choice_set.all %}
+      <!-- choice.votes is used to display the number of votes for each choice -->
       <li>{{ choice.choice_text }}</li>
+  <!-- pluralize is used to add an 's' to the word vote if there are more than one vote -->
   {% endfor %}
 </ul>
-
+<!--  this line is used to display the number of votes for each choice -->
 <form action="{% url 'polls:vote' question.id %}" method="post">
+<!-- csrf_token is used to protect against CSRF attacks, which is a type of attack that tricks the user into submitting a form without their knowledge   -->
 {% csrf_token %}
+<!--  this is a fieldset element that groups related elements in a form -->
 <fieldset>
+      <!--  this is a legend element that provides a caption for the fieldset -->
       <legend><h1>{{ question.question_text }}</h1></legend>
+      <!--  this is a message that will be displayed if there are no questions available -->
       {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+      <!--  this is a message that will be displayed if there are no questions available -->
       {% for choice in question.choice_set.all %}
+          <!--  this is a radio button that allows the user to select one of the choices -->
           <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+          <!--  this is a label element that provides a caption for the radio button -->
           <label for="choice"{{ forloop.counter }}"> {{ choice.choice_text }}</label> 
 <br>
+      <!-- endfor ends the for loop -->
       {% endfor %}
 </fieldset>
+<!-- this line is used to display the number of votes for each choice -->
 <input type="submit" value="Vote"
 </form>

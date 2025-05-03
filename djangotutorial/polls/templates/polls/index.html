@@ -1,14 +1,24 @@
+<!-- This file is for the index page of the polls app, which lists the latest questions added by the user. -->
+<!-- The file uses Django's template language to dynamically generate the HTML content. -->
+ 
+<!-- load static is used to load static files like CSS. -->
 {% load static %}
-
+<!-- link rel="stylesheet" is used to link the CSS file for styling the page. -->
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
-
+<!-- if latest_question_list will be used to check if there are any questions available -->
 {% if latest_question_list %}
     <ul>
+    <!-- this for loop will iterate throught the latest_question_list and display each question -->
     {% for question in latest_question_list %} 
+        <!-- the url tag is used to create a link to the detail view of each question -->
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
 </li>
+    <!-- endfor is used to end the or loop -->
     {% endfor %}
     </ul>
+<!-- this else statement will be executed if there are no questions available -->
 {% else %}
+    <!-- this is a message that will be displayed if there are no questions available -->
     <p>No polls are available.</p>
+<!-- this is a link to create a new question -->
 {% endif %}    
