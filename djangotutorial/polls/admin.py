@@ -1,4 +1,4 @@
-# I am importing the admin moddle from django.contrib
+# I am importing the admin module from the django.contrib module
 from django.contrib import admin
 # then I am importing the Choice class and Quesiton class from the .models module
 from .models import Choice, Question
